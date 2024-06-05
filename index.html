@@ -1,0 +1,84 @@
+<html>
+
+<head>
+	<title>Matematyka dyskretna - kalkulatory</title>
+	<link rel='stylesheet' type='text/css' href='style.css'>
+
+	<meta charset="UTF-8">
+	<meta name="description" content="Matematyka dyskretna - kalkulatory">
+	<meta name="keywords" content="algorytm euklidesa, rozszerzony, matematyka dyskretna, s, s', przystawanie, kongruencja">
+	<meta name="author" content="Jakgor471">
+	<link rel="icon" type="image/x-icon" href="icon.png">
+</head>
+
+<body>
+	<div id='main'>
+		<h1>Rozszerzony Algorytm Euklidesa</h1>
+		<hr>
+		<div class='controls'>
+			<h3>Dane wejściowe:</h3>
+			<label for='EUKLIDinputA'>parametr a:</label>
+			<input type='number' id='EUKLIDinputA' value='100'/><br>
+			<label for='EUKLIDinputB'>parametr b:</label>
+			<input type='number' id='EUKLIDinputB' value='100'/><br>
+			<label for='EUKLIDcheckbox'>Rozpisz kroki:</label>
+			<input type='checkbox' id='EUKLIDcheckbox' value='100'/><br>
+			<input type='button' onclick='EUKLIDoblicz();' value='Oblicz'></input>
+		</div>
+
+		<span class='floatclear'></span>
+		<table id='euklid' class="tabela">
+			<thead>
+			<tr>
+				<th>a</th><th>b</th><th>q</th><th>s</th><th>s'</th><th>t</th><th>t'</th>
+			</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+
+		<div id="euklidwynik"></div>
+
+		<p>
+			Pod <i>m</i> podstawiamy <i>s</i> z ostatniego wiersza, pod <i>n</i> podstawiamy <i>t</i> z ostatniego wiersza.
+			Jeżeli jeden ze współczynników jest mniejszy od zero, a zatem nie należy do zbioru reszt, dodajemy do niego <i>b</i> tyle razy, aż
+			będzie on nieujemny. Wartość <i>k</i> jaką trzeba dodać można policzyć ze wzoru: <b>&#8968;(|m| / b)&#8969; &#215; b</b></p>
+		<p>
+			Zatem jeśli <i>s</i> < 0 to <i>m = s + k</i>.
+		</p>
+
+		<h1>Algorytm mnożenia</h1>
+		<hr>
+		<div class='controls'>
+			<h3>Dane wejściowe:</h3>
+			<label for='MULinputA'>parametr A:</label>
+			<input type='number' id='MULinputA' value='100'/><br>
+			<label for='MULinputB'>parametr B:</label>
+			<input type='number' id='MULinputB' value='100'/><br>
+			<input type='button' onclick='MULoblicz();' value='Oblicz'></input>
+		</div>
+
+		<span class='floatclear'></span>
+		<table id='multable' class="tabela">
+			<thead>
+			<tr>
+				<th>A</th><th>B</th><th>Opis</th>
+			</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+
+		<div id="mulwynik"></div>
+
+		<p>By obliczyć wynik sumujemy wyrazy <i>A</i>, gdzie <i>B</i> nieparzyste</p>
+
+		<h1>Algorytm mnożenia modulo</h1>
+		<hr>
+		<p>A:= 2A MOD m, B := B DIV 2. Reszta analogicznie jak w zwykłym mnożeniu.</p>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+
+</html>
