@@ -75,7 +75,29 @@
 
 		<h1>Algorytm mnożenia modulo</h1>
 		<hr>
-		<p>A:= 2A MOD m, B := B DIV 2. Reszta analogicznie jak w zwykłym mnożeniu.</p>
+		<div class='controls'>
+			<h3>Dane wejściowe:</h3>
+			<label for='MULMODinputA'>parametr A:</label>
+			<input type='number' id='MULMODinputA' value='100'/><br>
+			<label for='MULMODinputB'>parametr B:</label>
+			<input type='number' id='MULMODinputB' value='100'/><br>
+			<label for='MULMODinputB'>parametr m:</label>
+			<input type='number' id='MULMODinputM' value='8'/><br>
+			<input type='button' onclick='MULMODoblicz();' value='Oblicz'></input>
+		</div>
+
+		<span class='floatclear'></span>
+		<table id='mulmodtable' class="tabela">
+			<thead>
+			<tr>
+				<th>A</th><th>B</th><th>Opis</th>
+			</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+
+		<div id="mulmodwynik"></div>
 	</div>
 
 	<script src="script.js"></script>

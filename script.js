@@ -126,12 +126,17 @@ function EUKLIDoblicz(){
 }
 
 /*MNOZENIE*/
-function mnozenie(a, b){
+function mnozenie(a, b, mod){
     const sign = Math.sign(b);
     const wiersze = [{a: a * sign, b: b, parity: (b % 2) === 0}];
+    mod = Math.abs(mod);
 
     while(Math.abs(b) > 0.000001){
         a = a * 2;
+
+        if(!isNaN(mod))
+            a = a % mod;
+
         b = Math.floor(Math.abs(b) / 2);
 
         wiersze.push({a: a * sign, b: b, parity: (b % 2) === 0})
@@ -143,8 +148,8 @@ function mnozenie(a, b){
 }
 
 function MULoblicz(){
-    const a = Math.abs(document.getElementById('MULinputA').value);
-    const b = Math.abs(document.getElementById('MULinputB').value);
+    const a = document.getElementById('MULinputA').value;
+    const b = document.getElementById('MULinputB').value;
     const table = document.getElementById('multable').getElementsByTagName('tbody')[0];
     while(table.firstChild){
         table.removeChild(table.lastChild);
@@ -162,7 +167,8 @@ function MULoblicz(){
         nowaKomorka.innerHTML = data[i].b;
 
         if(!data[i].parity){
-            liczby.push(wnawias(data[i].a));
+            if(Math.abs(data[i].a) > 0)
+                liczby.push(wnawias(data[i].a));
             suma += data[i].a;
             nowyWiersz.style.backgroundColor = "#806565";
         }
@@ -174,5 +180,50 @@ function MULoblicz(){
     }
 
     const wynikDiv = document.getElementById("mulwynik");
+    if(liczby.length < 1)
+        liczby.push(0);
     wynikDiv.innerHTML = "<p>Wynik: " + liczby.join("+") + " = <b>" + suma + "</b></p>";
+}
+
+function MULMODoblicz(){
+    const a = document.getElementById('MULMODinputA').value;
+    const b = document.getElementById('MULMODinputB').value;
+    const m = Math.abs(document.getElementById('MULMODinputM').value);
+    const table = document.getElementById('mulmodtable').getElementsByTagName('tbody')[0];
+    while(table.firstChild){
+        table.removeChild(table.lastChild);
+    }
+
+    const liczby = [];
+    const data = mnozenie(+a, +b, +m);
+    let suma = 0;
+
+    for(let i = 0; i < data.length; ++i){
+        const nowyWiersz = table.insertRow();
+        let nowaKomorka = nowyWiersz.insertCell();
+        nowaKomorka.innerHTML = data[i].a;
+        nowaKomorka = nowyWiersz.insertCell();
+        nowaKomorka.innerHTML = data[i].b;
+
+        if(!data[i].parity){
+            if(Math.abs(data[i].a) > 0)
+                liczby.push(wnawias(data[i].a));
+            suma += data[i].a;
+            nowyWiersz.style.backgroundColor = "#806565";
+        }
+
+        if(i > 0){
+            nowaKomorka = nowyWiersz.insertCell();
+            nowaKomorka.innerHTML = "A:=(2&#215;"+data[i - 1].a + ") MOD " + m + ", B:=" + data[i - 1].b + " DIV 2";
+        }
+    }
+
+    const wynikDiv = document.getElementById("mulmodwynik");
+    let wynik = suma%m;
+    
+    if(wynik < 0)
+        wynik += m;
+    if(liczby.length < 1)
+        liczby.push(0);
+    wynikDiv.innerHTML = "<p>Wynik: (" + liczby.join("+") + ") MOD " + m + " = <b>" + wynik + "</b></p>";
 }
